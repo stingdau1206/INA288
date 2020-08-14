@@ -48,13 +48,17 @@ Section Cross References
     ina288.o(i.INA288_read_16) refers to main.o(.bss) for hi2c1
     ina288.o(i.INA288_read_24) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Mem_Read) for HAL_I2C_Mem_Read
     ina288.o(i.INA288_read_24) refers to main.o(.bss) for hi2c1
+    ina288.o(i.INA288_read_40) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Mem_Read) for HAL_I2C_Mem_Read
+    ina288.o(i.INA288_read_40) refers to main.o(.bss) for hi2c1
     ina288.o(i.INA288_write_16) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Master_Transmit) for HAL_I2C_Master_Transmit
     ina288.o(i.INA288_write_16) refers to main.o(.bss) for hi2c1
-    ina288.o(i.INA288_write_40) refers to stm32f1xx_hal_i2c.o(i.HAL_I2C_Mem_Read) for HAL_I2C_Mem_Read
-    ina288.o(i.INA288_write_40) refers to main.o(.bss) for hi2c1
     ina288.o(i.Measurement) refers to ina288.o(i.INA288_read_16) for INA288_read_16
     ina288.o(i.Measurement) refers to ina288.o(i.INA288_read_24) for INA288_read_24
-    ina288.o(i.Measurement) refers to dfltui.o(.text) for __aeabi_ui2d
+    ina288.o(i.Measurement) refers to ffltui.o(.text) for __aeabi_ui2f
+    ina288.o(i.Measurement) refers to fmul.o(.text) for __aeabi_fmul
+    ina288.o(i.Measurement) refers to ina288.o(i.INA288_read_40) for INA288_read_40
+    ina288.o(i.Measurement) refers to ffltul.o(.text) for __aeabi_ul2f
+    ina288.o(i.Measurement) refers to f2d.o(.text) for __aeabi_f2d
     ina288.o(i.Measurement) refers to dmul.o(.text) for __aeabi_dmul
     ina288.o(i.Measurement) refers to d2f.o(.text) for __aeabi_d2f
     ina288.o(i.Measurement) refers to ina288.o(.data) for .data
@@ -298,10 +302,14 @@ Section Cross References
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    fmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     dmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
-    dfltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
-    dfltui.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    ffltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffltui.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffltul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffltul.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    f2d.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     d2f.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     d2f.o(.text) refers to fepilogue.o(.text) for _float_round
     entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
@@ -335,13 +343,13 @@ Removing Unused input sections from the image.
     Removing ina288.o(.revsh_text), (4 bytes).
     Removing ina288.o(.rrx_text), (6 bytes).
     Removing ina288.o(i.INA288_Reset), (10 bytes).
-    Removing ina288.o(i.INA288_init), (42 bytes).
+    Removing ina288.o(i.INA288_init), (44 bytes).
     Removing ina288.o(i.INA288_read_16), (44 bytes).
     Removing ina288.o(i.INA288_read_24), (52 bytes).
+    Removing ina288.o(i.INA288_read_40), (72 bytes).
     Removing ina288.o(i.INA288_write_16), (40 bytes).
-    Removing ina288.o(i.INA288_write_40), (64 bytes).
-    Removing ina288.o(i.Measurement), (76 bytes).
-    Removing ina288.o(.data), (8 bytes).
+    Removing ina288.o(i.Measurement), (136 bytes).
+    Removing ina288.o(.data), (16 bytes).
     Removing stm32f1xx_hal_gpio_ex.o(.rev16_text), (4 bytes).
     Removing stm32f1xx_hal_gpio_ex.o(.revsh_text), (4 bytes).
     Removing stm32f1xx_hal_gpio_ex.o(.rrx_text), (6 bytes).
@@ -556,13 +564,16 @@ Removing Unused input sections from the image.
     Removing system_stm32f1xx.o(.revsh_text), (4 bytes).
     Removing system_stm32f1xx.o(.rrx_text), (6 bytes).
     Removing system_stm32f1xx.o(i.SystemCoreClockUpdate), (104 bytes).
+    Removing fmul.o(.text), (100 bytes).
     Removing dmul.o(.text), (228 bytes).
-    Removing dfltui.o(.text), (26 bytes).
+    Removing ffltui.o(.text), (10 bytes).
+    Removing ffltul.o(.text), (28 bytes).
+    Removing f2d.o(.text), (38 bytes).
     Removing d2f.o(.text), (56 bytes).
     Removing fepilogue.o(.text), (110 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-241 unused section(s) (total 18742 bytes) removed from the image.
+244 unused section(s) (total 18970 bytes) removed from the image.
 
 ==============================================================================
 
@@ -590,7 +601,7 @@ Image Symbol Table
     ../Src/stm32f1xx_hal_msp.c               0x00000000   Number         0  stm32f1xx_hal_msp.o ABSOLUTE
     ../Src/stm32f1xx_it.c                    0x00000000   Number         0  stm32f1xx_it.o ABSOLUTE
     ../Src/system_stm32f1xx.c                0x00000000   Number         0  system_stm32f1xx.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
@@ -601,17 +612,20 @@ Image Symbol Table
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/d2f.c                  0x00000000   Number         0  d2f.o ABSOLUTE
+    ../fplib/microlib/f2d.c                  0x00000000   Number         0  f2d.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltul.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
+    ../fplib/microlib/fpmul.c                0x00000000   Number         0  fmul.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c 0x00000000   Number         0  stm32f1xx_hal.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c 0x00000000   Number         0  stm32f1xx_hal_cortex.o ABSOLUTE
     ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c 0x00000000   Number         0  stm32f1xx_hal_dma.o ABSOLUTE
@@ -895,17 +909,17 @@ Memory Map of the image
 
     0x08000000   0x08000000   0x00000130   Data   RO            3    RESET               startup_stm32f103xe.o
     0x08000130   0x08000130   0x00000000   Code   RO         1895  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000130   0x08000130   0x00000004   Code   RO         1908    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x08000134   0x08000134   0x00000004   Code   RO         1911    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000138   0x08000138   0x00000000   Code   RO         1913    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000138   0x08000138   0x00000000   Code   RO         1915    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000138   0x08000138   0x00000008   Code   RO         1916    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000140   0x08000140   0x00000000   Code   RO         1918    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000140   0x08000140   0x00000000   Code   RO         1920    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000140   0x08000140   0x00000004   Code   RO         1909    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000130   0x08000130   0x00000004   Code   RO         1914    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x08000134   0x08000134   0x00000004   Code   RO         1917    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000138   0x08000138   0x00000000   Code   RO         1919    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000138   0x08000138   0x00000000   Code   RO         1921    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000138   0x08000138   0x00000008   Code   RO         1922    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000140   0x08000140   0x00000000   Code   RO         1924    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000140   0x08000140   0x00000000   Code   RO         1926    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000140   0x08000140   0x00000004   Code   RO         1915    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000144   0x08000144   0x00000024   Code   RO            4    .text               startup_stm32f103xe.o
     0x08000168   0x08000168   0x00000024   Code   RO         1900    .text               mc_w.l(memseta.o)
-    0x0800018c   0x0800018c   0x00000024   Code   RO         1927    .text               mc_w.l(init.o)
+    0x0800018c   0x0800018c   0x00000024   Code   RO         1933    .text               mc_w.l(init.o)
     0x080001b0   0x080001b0   0x00000002   Code   RO          132    i.BusFault_Handler  stm32f1xx_it.o
     0x080001b2   0x080001b2   0x00000002   PAD
     0x080001b4   0x080001b4   0x0000000c   Code   RO          133    i.DMA1_Channel7_IRQHandler  stm32f1xx_it.o
@@ -969,13 +983,13 @@ Memory Map of the image
     0x08001ad0   0x08001ad0   0x00000048   Code   RO         1861    i.SystemInit        system_stm32f1xx.o
     0x08001b18   0x08001b18   0x00000002   Code   RO          142    i.UsageFault_Handler  stm32f1xx_it.o
     0x08001b1a   0x08001b1a   0x00000020   Code   RO         1337    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x08001b3a   0x08001b3a   0x0000000e   Code   RO         1933    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08001b48   0x08001b48   0x00000002   Code   RO         1934    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08001b4a   0x08001b4a   0x0000000e   Code   RO         1935    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08001b3a   0x08001b3a   0x0000000e   Code   RO         1939    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08001b48   0x08001b48   0x00000002   Code   RO         1940    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08001b4a   0x08001b4a   0x0000000e   Code   RO         1941    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08001b58   0x08001b58   0x00000090   Code   RO           15    i.main              main.o
     0x08001be8   0x08001be8   0x00000010   Data   RO         1862    .constdata          system_stm32f1xx.o
     0x08001bf8   0x08001bf8   0x00000008   Data   RO         1863    .constdata          system_stm32f1xx.o
-    0x08001c00   0x08001c00   0x00000020   Data   RO         1931    Region$$Table       anon$$obj.o
+    0x08001c00   0x08001c00   0x00000020   Data   RO         1937    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001c20, Size: 0x000004a8, Max: 0x0000c000, ABSOLUTE)

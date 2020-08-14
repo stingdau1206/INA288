@@ -27,7 +27,7 @@
 #define INA288_CURRLSBCALC_30	0x1000 
 #define INA288_CURRLSBCALC_31 0x0400
 #define INA288_TEMPCOCONFIG_4 0x0000
-#define INA288_DIAG_ALRT			0x0001 // Transparent mode, Normal operation
+#define INA288_DIAG_ALRT			0x8001 // Latch mode, Normal operation
 #define INA288_address				0x40 // A0,A1 -> GND
 #define INA288_Shunt_Fs0			163.84 // (mV)
 #define INA288_Shunt_Fs1			40.96	// (mV)
@@ -48,7 +48,7 @@ void INA288_init (void);
 
 void INA288_write_16 (unsigned char add, uint16_t data);
 
-unsigned long INA288_write_40(unsigned char add);
+uint64_t INA288_read_40(unsigned char add);
 
 uint32_t INA288_read_24 (unsigned char add);   
 

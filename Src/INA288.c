@@ -1,5 +1,5 @@
 #include "INA288.h"
-float current, voltage;
+float current, voltage, power, energy;
 void INA288_Reset (void)
 {
 INA288_write_16(REG_CONFIG_1,INA288_RESET);
@@ -14,9 +14,9 @@ void INA288_write_16 (unsigned char add, uint16_t data)
 	HAL_I2C_Master_Transmit(&hi2c1,INA288_address<<1,d,3,100);
 }
 //doc thanh ghi 40 bit
-unsigned long INA288_write_40(unsigned char add)
+uint64_t INA288_read_40(unsigned char add)
 {
-	unsigned long value;
+	uint64_t value;
 	uint8_t d[5];
 	HAL_I2C_Mem_Read(&hi2c1,(INA288_address<<1),add,I2C_MEMADD_SIZE_8BIT,d,5,100);
 	value = d[4];
@@ -62,8 +62,10 @@ void Measurement(void)
 {
 	if (INA288_read_16(REG_DIAG_ALRT) & 0x02)
 	{
-		current=INA288_read_24(REG_CURRENT)*CURRENT_LSB0;
-		voltage=INA288_read_24(REG_VBUS)*INA288_VBus;
+		current=(float)INA288_read_24(REG_CURRENT)*CURRENT_LSB0;
+		voltage=(float)INA288_read_24(REG_VBUS)*INA288_VBus;
+		power=(float)INA288_read_40(REG_POWER)*POWER_LSB;
+		energy=(float)INA288_read_40(REG_ENERGY)*ENERGY_LSB;
 	}
 	
 }
