@@ -13,6 +13,19 @@ void INA288_write_16 (unsigned char add, uint16_t data)
 	d[2]= data & 0xff;
 	HAL_I2C_Master_Transmit(&hi2c1,INA288_address<<1,d,3,100);
 }
+//doc thanh ghi 40 bit
+unsigned long INA288_write_40(unsigned char add)
+{
+	unsigned long value;
+	uint8_t d[5];
+	HAL_I2C_Mem_Read(&hi2c1,(INA288_address<<1),add,I2C_MEMADD_SIZE_8BIT,d,5,100);
+	value = d[4];
+	value = value | (d[3] << 8);
+	value = value | (d[2] << 16);
+	value = value | (d[1] << 24);
+	value = value | (d[0] << 32);
+	return value;
+}
 // doc thanh ghi 24 bit
 uint32_t INA288_read_24 (unsigned char add)
 {

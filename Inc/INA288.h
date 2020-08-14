@@ -25,7 +25,7 @@
 #define INA288_CONFIG_1				0x0040 // normal mode, delay ADC=2ms, shunt full scale 163.84
 #define INA288_ADCCONFIG_2		0xBB6C //Avg ADC = 128 sample, continuous shunt & bus, time convert =1.052ms
 #define INA288_CURRLSBCALC_30	0x1000 
-#define INA288_CURRLSBCALC_31   0x0400
+#define INA288_CURRLSBCALC_31 0x0400
 #define INA288_TEMPCOCONFIG_4 0x0000
 #define INA288_DIAG_ALRT			0x0001 // Transparent mode, Normal operation
 #define INA288_address				0x40 // A0,A1 -> GND
@@ -37,14 +37,18 @@
 #define INA288_CURRLSBCALC0		4096000
 #define INA288_CURRLSBCALC1		1024000
 #define INA288_RESET          0x8040
-#define Rshunt                  0.002
-#define CURRENT_LSB0            0.15625 // (mA/LSB)
-#define CURRENT_LSB1            0.0390625 // (mA/LSB)
+#define Rshunt                0.002
+#define CURRENT_LSB0          0.15625 // (mA/LSB)
+#define CURRENT_LSB1          0.0390625 // (mA/LSB)
+#define POWER_LSB							0.0005 // (W/LSB)
+#define ENERGY_LSB						0.008	// (J/LSB)
 #include "stm32f1xx_hal.h"
 extern I2C_HandleTypeDef hi2c1;
 void INA288_init (void);  
 
-void INA288_write_16 (unsigned char add, uint16_t data);  
+void INA288_write_16 (unsigned char add, uint16_t data);
+
+unsigned long INA288_write_40(unsigned char add);
 
 uint32_t INA288_read_24 (unsigned char add);   
 
