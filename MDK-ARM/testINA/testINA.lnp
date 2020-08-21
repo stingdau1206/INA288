@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"testina\startup_stm32f103xb.o"
+"testina\ina288.o"
+"testina\main.o"
+"testina\stm32f1xx_it.o"
+"testina\stm32f1xx_hal_msp.o"
+"testina\stm32f1xx_hal_gpio_ex.o"
+"testina\stm32f1xx_hal_i2c.o"
+"testina\stm32f1xx_hal.o"
+"testina\stm32f1xx_hal_rcc.o"
+"testina\stm32f1xx_hal_rcc_ex.o"
+"testina\stm32f1xx_hal_gpio.o"
+"testina\stm32f1xx_hal_dma.o"
+"testina\stm32f1xx_hal_cortex.o"
+"testina\stm32f1xx_hal_pwr.o"
+"testina\stm32f1xx_hal_flash.o"
+"testina\stm32f1xx_hal_flash_ex.o"
+"testina\stm32f1xx_hal_exti.o"
+"testina\stm32f1xx_hal_tim.o"
+"testina\stm32f1xx_hal_tim_ex.o"
+"testina\stm32f1xx_hal_uart.o"
+"testina\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "testINA\testINA.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "testINA.map" -o testINA\testINA.axf

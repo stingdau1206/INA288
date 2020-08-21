@@ -1,0 +1,4 @@
+Removed Member From Class: ClassName=INA288 Member=RS?
+Added Component: Designator=Rshunt2512(Rshunt2512)
+Add component. Clean all parameters for all variants
+Added Member To Class: ClassName=INA288 Member=Component Rshunt2512

@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=NetINA1_3 Pin=P2-3
+Removed Pin From Net: NetName=NetINA1_5 Pin=P2-5
+Added Pin To Net: NetName=NetINA1_5 Pin=P2-3
+Added Pin To Net: NetName=NetINA1_3 Pin=P2-5
+Added Member To Class: ClassName=INA288 Member=Component R5 10k (1206-1%)

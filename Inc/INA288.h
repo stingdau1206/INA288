@@ -22,8 +22,8 @@
 #define REG_MANUFACTURER_ID		0x3E
 #define REG_DEVICE_ID					0x3F
 //Config Value
-#define INA288_CONFIG_1				0x0040 // normal mode, delay ADC=2ms, shunt full scale 163.84
-#define INA288_ADCCONFIG_2		0xBB6C //Avg ADC = 128 sample, continuous shunt & bus, time convert =1.052ms
+#define INA288_CONFIG_1				0x8000 // normal mode, delay ADC=2ms, shunt full scale 163.84
+#define INA288_ADCCONFIG_2		0xBFC4 //Avg ADC = 128 sample, continuous shunt & bus, time convert =1.052ms
 #define INA288_CURRLSBCALC_30	0x1000 
 #define INA288_CURRLSBCALC_31 0x0400
 #define INA288_TEMPCOCONFIG_4 0x0000
@@ -33,17 +33,18 @@
 #define INA288_Shunt_Fs1			40.96	// (mV)
 #define INA288_Vshunt0				312.5 // (nV/LSB)
 #define INA288_Vshunt1				78.125 //	(nV/LSB)
-#define INA288_VBus						195.3125 // (uV/LSB)
-#define INA288_CURRLSBCALC0		4096000
-#define INA288_CURRLSBCALC1		1024000
+#define INA288_VBus						0.0001953125 // (mV/LSB)
+#define INA288_CURRLSBCALC0		4096
+#define INA288_CURRLSBCALC1		1024
 #define INA288_RESET          0x8040
-#define Rshunt                0.002
-#define CURRENT_LSB0          0.15625 // (mA/LSB)
-#define CURRENT_LSB1          0.0390625 // (mA/LSB)
+#define Rshunt                0.02
+#define CURRENT_LSB0          0.015625 // (mA/LSB)
+#define CURRENT_LSB1          0.00390625 // (mA/LSB)
 #define POWER_LSB							0.0005 // (W/LSB)
 #define ENERGY_LSB						0.008	// (J/LSB)
 #include "stm32f1xx_hal.h"
 extern I2C_HandleTypeDef hi2c1;
+extern UART_HandleTypeDef huart1;
 void INA288_init (void);  
 
 void INA288_write_16 (unsigned char add, uint16_t data);
@@ -53,6 +54,8 @@ uint64_t INA288_read_40(unsigned char add);
 uint32_t INA288_read_24 (unsigned char add);   
 
 uint16_t INA288_read_16(unsigned char add);  
+
+void UART_Trans_24(uint32_t dta);
 
 void Measurement(void);
 

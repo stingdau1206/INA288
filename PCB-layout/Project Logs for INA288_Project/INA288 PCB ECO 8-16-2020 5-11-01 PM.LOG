@@ -1,0 +1,14 @@
+Added Component: Designator=INA228(INA228)
+Add component. Clean all parameters for all variants
+Added Component: Designator=RS?(Shunt 10mR 1.2x10x7MM)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Category"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "Shunt 10mR 1.2x10x7MM"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "HAND"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10mR"; VariantName = "[No Variations]"
+Added Class: Name=INA288
+Added Room: Name=INA288

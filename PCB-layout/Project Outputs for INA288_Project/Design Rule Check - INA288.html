@@ -1,0 +1,752 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD18\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8/19/2020</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">12:28:46 AM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///E:\INA288\PCB-layout\INA288.PcbDoc" class="file"><acronym title="E:\INA288\PCB-layout\INA288.PcbDoc">E:\INA288\PCB-layout\INA288.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">140</td></tr>
+</table>
+</td>
+</table><a name="ID30TQ12TLVZE2JL3PBVVACWHW3DIYAB1BTSNGAMOYX5DNWEO5MAJJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFY1GYAUQ2EI0M5NHZMMJR1D44KV5FCWOWYZPKAK3JWCJURHLIZ1O">Clearance Constraint (Gap=0.5mm) (All),(All)</a></td>
+<td class="column2">44</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJFKMMPVQBLTLEYFBYKZ0D5FOEN0C202S5M40DWNLKRONEMN2X0UC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4RJV0AXMLOB0CCYRQAPOPZJBOKNGPRCQBIISYLTZP4VABKF3NEM">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC5JDBEYECYIFNIQN5OFIX1ODFGIBTJUWVXH34VGCGC3J31TGFQTO">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPROOTGMHONN3N0LUKEU0JCPETHC2ZB4UF1WBKKDHBDSFBEKFJBK">Width Constraint (Min=0.3mm) (Max=1.5mm) (Preferred=0.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZCI4AACQ1RRXNGPLM4GZ0RMALE2HZJ5JWPEQSJD2Z3QW522UF5D">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCGGOXWCFHR0BMOMPK1G0EZQWERZKHXSM2XS03HTZ2DAK0T211VN">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUUKFVPIYNQAKPMWBGZOGDYV0PJ01PMKD1LCNT2CAD4KHH4425YYO">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHVK1TH52NFEOPQ23S02ETQ1RVNGWNSH1DT52BIBCNXZLPZRMRHUN">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5040IJKRDSGXOUV5OTBM5MOJBDD4YGKGFONYXJBTFCIAQVV1ZZ2F">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">96</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2JG5OXEJBHMPOJ2XJNJNKIHAIBYRZGZOXDGIHFIC2DF1D04GZWAH">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDY0CIDBPO4VCVCJGXT2MUFZGBOJOEK3I0NHDBENCQ2VL1IWP0VJXK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2MSTPS5CW5IBE03JYRYY2WUGKINKHQLTH3JR23CVZKNY3JIVULJG">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">140</td>
+</tr>
+</table><br><a name="IDFY1GYAUQ2EI0M5NHZMMJR1D44KV5FCWOWYZPKAK3JWCJURHLIZ1O"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.5mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-10(129.159mm,65.516mm) on Top Layer And Pad INA1-9(129.159mm,65.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-10(129.159mm,65.516mm) on Top Layer And Track (129.159mm,65.016mm)(133.543mm,65.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-2(124.759mm,65.016mm) on Top Layer And Pad INA1-3(124.759mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4866.599mil|Location2.X=4891.143mil|Location1.Y=2532.465mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4866.599mil|Location2.X=4891.143mil|Location1.Y=2532.465mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.491mm &lt; 0.5mm) Between Pad INA1-2(124.759mm,65.016mm) on Top Layer And Track (123.07mm,65.017mm)(123.571mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-2(124.759mm,65.016mm) on Top Layer And Track (123.571mm,64.516mm)(124.759mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-2(124.759mm,65.016mm) on Top Layer And Track (124.759mm,64.516mm)(126.111mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-3(124.759mm,64.516mm) on Top Layer And Pad INA1-4(124.759mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-3(124.759mm,64.516mm) on Top Layer And Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Pad INA1-3(124.759mm,64.516mm) on Top Layer And Track (124.759mm,65.116mm)(124.759mm,65.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-4(124.759mm,64.016mm) on Top Layer And Pad INA1-5(124.759mm,63.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4866.599mil|Location2.X=4890.953mil|Location1.Y=2519.69mil|Location2.Y=2547.69mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4866.599mil|Location2.X=4890.953mil|Location1.Y=2519.69mil|Location2.Y=2547.69mil|Absolute=True">Clearance Constraint: (0.491mm &lt; 0.5mm) Between Pad INA1-4(124.759mm,64.016mm) on Top Layer And Track (123.07mm,65.017mm)(123.571mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-4(124.759mm,64.016mm) on Top Layer And Track (123.571mm,64.516mm)(124.759mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-4(124.759mm,64.016mm) on Top Layer And Track (124.108mm,62.865mm)(124.759mm,63.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-4(124.759mm,64.016mm) on Top Layer And Track (124.759mm,64.516mm)(126.111mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4878.666mil|Location2.X=4911.019mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-5(124.759mm,63.516mm) on Top Layer And Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-6(129.159mm,63.516mm) on Top Layer And Pad INA1-7(129.159mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-6(129.159mm,63.516mm) on Top Layer And Track (127.762mm,64.016mm)(129.159mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-6(129.159mm,63.516mm) on Top Layer And Track (129.159mm,64.016mm)(130.335mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5108.993mil|Location2.X=5133.727mil|Location1.Y=2493.248mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5108.993mil|Location2.X=5133.727mil|Location1.Y=2493.248mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.481mm &lt; 0.5mm) Between Pad INA1-6(129.159mm,63.516mm) on Top Layer And Track (130.335mm,64.016mm)(130.621mm,63.73mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-7(129.159mm,64.016mm) on Top Layer And Pad INA1-8(129.159mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Pad INA1-7(129.159mm,64.016mm) on Top Layer And Track (129.159mm,62.738mm)(129.159mm,63.416mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-7(129.159mm,64.016mm) on Top Layer And Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-8(129.159mm,64.516mm) on Top Layer And Pad INA1-9(129.159mm,65.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5051.895mil|Location2.X=5084.247mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-8(129.159mm,64.516mm) on Top Layer And Track (127.762mm,64.016mm)(129.159mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-8(129.159mm,64.516mm) on Top Layer And Track (129.159mm,64.016mm)(130.335mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-8(129.159mm,64.516mm) on Top Layer And Track (129.159mm,65.016mm)(133.543mm,65.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5108.993mil|Location2.X=5133.539mil|Location1.Y=2519.69mil|Location2.Y=2547.539mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5108.993mil|Location2.X=5133.539mil|Location1.Y=2519.69mil|Location2.Y=2547.539mil|Absolute=True">Clearance Constraint: (0.481mm &lt; 0.5mm) Between Pad INA1-8(129.159mm,64.516mm) on Top Layer And Track (130.335mm,64.016mm)(130.621mm,63.73mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-9(129.159mm,65.016mm) on Top Layer And Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Pad INA1-9(129.159mm,65.016mm) on Top Layer And Track (129.159mm,65.516mm)(129.701mm,66.058mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.533mil|Location2.X=4886.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.533mil|Location2.X=4886.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer And Track (123.07mm,65.017mm)(123.571mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.533mil|Location2.X=4886.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.533mil|Location2.X=4886.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer And Track (123.571mm,64.516mm)(124.759mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2500.005mil|Location2.Y=2520.94mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer And Track (124.108mm,62.865mm)(124.759mm,63.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (122.564mm,64.016mm)(124.759mm,64.016mm) on Top Layer And Track (124.759mm,64.516mm)(126.111mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Track (123.571mm,64.516mm)(124.759mm,64.516mm) on Top Layer And Track (124.759mm,65.116mm)(124.759mm,65.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4901.304mil|Location2.X=4933.657mil|Location1.Y=2541.343mil|Location2.Y=2562.278mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Track (124.759mm,64.516mm)(126.111mm,64.516mm) on Top Layer And Track (124.759mm,65.116mm)(124.759mm,65.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Track (127.762mm,64.016mm)(129.159mm,64.016mm) on Top Layer And Track (129.159mm,62.738mm)(129.159mm,63.416mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (127.762mm,64.016mm)(129.159mm,64.016mm) on Top Layer And Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2498.037mil|Location2.Y=2518.972mil|Absolute=True">Clearance Constraint: (0.3mm &lt; 0.5mm) Between Track (129.159mm,62.738mm)(129.159mm,63.416mm) on Top Layer And Track (129.159mm,64.016mm)(130.335mm,64.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (129.159mm,64.016mm)(130.335mm,64.016mm) on Top Layer And Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer And Track (129.159mm,65.016mm)(133.543mm,65.016mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5120.816mil|Location2.X=5153.168mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5120.816mil|Location2.X=5153.168mil|Location1.Y=2519.69mil|Location2.Y=2540.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer And Track (130.335mm,64.016mm)(130.621mm,63.73mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5132.091mil|Location2.X=5164.444mil|Location1.Y=2514.052mil|Location2.Y=2534.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5132.091mil|Location2.X=5164.444mil|Location1.Y=2514.052mil|Location2.Y=2534.987mil|Absolute=True">Clearance Constraint: (0.486mm &lt; 0.5mm) Between Track (129.159mm,64.516mm)(131.826mm,64.516mm) on Top Layer And Track (130.621mm,63.73mm)(131.275mm,63.076mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5074.533mil|Location2.X=5106.885mil|Location1.Y=2559.06mil|Location2.Y=2579.995mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (129.159mm,65.016mm)(133.543mm,65.016mm) on Top Layer And Track (129.159mm,65.516mm)(129.701mm,66.058mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5179.533mil|Location2.X=5211.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5179.533mil|Location2.X=5211.885mil|Location1.Y=2539.375mil|Location2.Y=2560.31mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.5mm) Between Track (129.159mm,65.016mm)(133.543mm,65.016mm) on Top Layer And Track (131.826mm,64.516mm)(132.524mm,63.818mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID5040IJKRDSGXOUV5OTBM5MOJBDD4YGKGFONYXJBTFCIAQVV1ZZ2F"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.151mil|Location2.X=3205.401mil|Location1.Y=2614.706mil|Location2.Y=2625.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.151mil|Location2.X=3205.401mil|Location1.Y=2614.706mil|Location2.Y=2625.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1_1-1(82.194mm,65.931mm) on Top Layer And Track (81.153mm,62.357mm)(81.153mm,66.7mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.926mil|Location2.X=3207.176mil|Location1.Y=2616.04mil|Location2.Y=2627.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.926mil|Location2.X=3207.176mil|Location1.Y=2616.04mil|Location2.Y=2627.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad C1_1-1(82.194mm,65.931mm) on Top Layer And Track (81.153mm,66.7mm)(83.236mm,66.7mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266.599mil|Location2.X=3277.849mil|Location1.Y=2565.493mil|Location2.Y=2576.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266.599mil|Location2.X=3277.849mil|Location1.Y=2565.493mil|Location2.Y=2576.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1_1-1(82.194mm,65.931mm) on Top Layer And Track (83.236mm,62.357mm)(83.236mm,66.7mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.151mil|Location2.X=3205.401mil|Location1.Y=2505.257mil|Location2.Y=2516.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3194.151mil|Location2.X=3205.401mil|Location1.Y=2505.257mil|Location2.Y=2516.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1_1-2(82.194mm,63.151mm) on Top Layer And Track (81.153mm,62.357mm)(81.153mm,66.7mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3264.824mil|Location2.X=3276.074mil|Location1.Y=2454.21mil|Location2.Y=2465.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3264.824mil|Location2.X=3276.074mil|Location1.Y=2454.21mil|Location2.Y=2465.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad C1_1-2(82.194mm,63.151mm) on Top Layer And Track (81.153mm,62.357mm)(83.236mm,62.357mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266.599mil|Location2.X=3277.849mil|Location1.Y=2456.044mil|Location2.Y=2467.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266.599mil|Location2.X=3277.849mil|Location1.Y=2456.044mil|Location2.Y=2467.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1_1-2(82.194mm,63.151mm) on Top Layer And Track (83.236mm,62.357mm)(83.236mm,66.7mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5284.151mil|Location2.X=5295.401mil|Location1.Y=2619.706mil|Location2.Y=2630.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5284.151mil|Location2.X=5295.401mil|Location1.Y=2619.706mil|Location2.Y=2630.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1-1(135.28mm,66.058mm) on Top Layer And Track (134.239mm,62.484mm)(134.239mm,66.827mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5285.926mil|Location2.X=5297.176mil|Location1.Y=2621.04mil|Location2.Y=2632.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5285.926mil|Location2.X=5297.176mil|Location1.Y=2621.04mil|Location2.Y=2632.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad C1-1(135.28mm,66.058mm) on Top Layer And Track (134.239mm,66.827mm)(136.322mm,66.827mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5356.599mil|Location2.X=5367.849mil|Location1.Y=2570.493mil|Location2.Y=2581.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5356.599mil|Location2.X=5367.849mil|Location1.Y=2570.493mil|Location2.Y=2581.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1-1(135.28mm,66.058mm) on Top Layer And Track (136.322mm,62.484mm)(136.322mm,66.827mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5284.151mil|Location2.X=5295.401mil|Location1.Y=2510.257mil|Location2.Y=2521.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5284.151mil|Location2.X=5295.401mil|Location1.Y=2510.257mil|Location2.Y=2521.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1-2(135.28mm,63.278mm) on Top Layer And Track (134.239mm,62.484mm)(134.239mm,66.827mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5354.824mil|Location2.X=5366.074mil|Location1.Y=2459.21mil|Location2.Y=2470.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5354.824mil|Location2.X=5366.074mil|Location1.Y=2459.21mil|Location2.Y=2470.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad C1-2(135.28mm,63.278mm) on Top Layer And Track (134.239mm,62.484mm)(136.322mm,62.484mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5356.599mil|Location2.X=5367.849mil|Location1.Y=2461.044mil|Location2.Y=2472.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5356.599mil|Location2.X=5367.849mil|Location1.Y=2461.044mil|Location2.Y=2472.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad C1-2(135.28mm,63.278mm) on Top Layer And Track (136.322mm,62.484mm)(136.322mm,66.827mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2609.706mil|Location2.X=2620.956mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2609.706mil|Location2.X=2620.956mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1_1-1(65.804mm,58.928mm) on Top Layer And Track (62.23mm,57.887mm)(66.573mm,57.887mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2560.493mil|Location2.X=2571.743mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2560.493mil|Location2.X=2571.743mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1_1-1(65.804mm,58.928mm) on Top Layer And Track (62.23mm,59.969mm)(66.573mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2611.04mil|Location2.X=2622.29mil|Location1.Y=2279.926mil|Location2.Y=2291.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2611.04mil|Location2.X=2622.29mil|Location1.Y=2279.926mil|Location2.Y=2291.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad LED1_1-1(65.804mm,58.928mm) on Top Layer And Track (66.573mm,57.887mm)(66.573mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2449.21mil|Location2.X=2460.46mil|Location1.Y=2348.824mil|Location2.Y=2360.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2449.21mil|Location2.X=2460.46mil|Location1.Y=2348.824mil|Location2.Y=2360.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad LED1_1-2(63.024mm,58.928mm) on Top Layer And Track (62.23mm,57.887mm)(62.23mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.257mil|Location2.X=2511.507mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.257mil|Location2.X=2511.507mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1_1-2(63.024mm,58.928mm) on Top Layer And Track (62.23mm,57.887mm)(66.573mm,57.887mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2451.044mil|Location2.X=2462.294mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2451.044mil|Location2.X=2462.294mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1_1-2(63.024mm,58.928mm) on Top Layer And Track (62.23mm,59.969mm)(66.573mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.706mil|Location2.X=4710.956mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.706mil|Location2.X=4710.956mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1-1(118.89mm,59.055mm) on Top Layer And Track (115.316mm,58.014mm)(119.659mm,58.014mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4650.493mil|Location2.X=4661.743mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4650.493mil|Location2.X=4661.743mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1-1(118.89mm,59.055mm) on Top Layer And Track (115.316mm,60.096mm)(119.659mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4701.04mil|Location2.X=4712.29mil|Location1.Y=2284.926mil|Location2.Y=2296.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4701.04mil|Location2.X=4712.29mil|Location1.Y=2284.926mil|Location2.Y=2296.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad LED1-1(118.89mm,59.055mm) on Top Layer And Track (119.659mm,58.014mm)(119.659mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.21mil|Location2.X=4550.46mil|Location1.Y=2353.824mil|Location2.Y=2365.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.21mil|Location2.X=4550.46mil|Location1.Y=2353.824mil|Location2.Y=2365.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad LED1-2(116.11mm,59.055mm) on Top Layer And Track (115.316mm,58.014mm)(115.316mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.257mil|Location2.X=4601.507mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.257mil|Location2.X=4601.507mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1-2(116.11mm,59.055mm) on Top Layer And Track (115.316mm,58.014mm)(119.659mm,58.014mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4541.044mil|Location2.X=4552.294mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4541.044mil|Location2.X=4552.294mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad LED1-2(116.11mm,59.055mm) on Top Layer And Track (115.316mm,60.096mm)(119.659mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.71mil|Location2.X=3314.96mil|Location1.Y=2713.824mil|Location2.Y=2725.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.71mil|Location2.X=3314.96mil|Location1.Y=2713.824mil|Location2.Y=2725.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R1_1-1(84.716mm,68.199mm) on Top Layer And Track (83.947mm,67.158mm)(83.947mm,69.24mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.257mil|Location2.X=3365.507mil|Location1.Y=2643.151mil|Location2.Y=2654.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.257mil|Location2.X=3365.507mil|Location1.Y=2643.151mil|Location2.Y=2654.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1_1-1(84.716mm,68.199mm) on Top Layer And Track (83.947mm,67.158mm)(88.29mm,67.158mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3305.044mil|Location2.X=3316.294mil|Location1.Y=2715.599mil|Location2.Y=2726.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3305.044mil|Location2.X=3316.294mil|Location1.Y=2715.599mil|Location2.Y=2726.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1_1-1(84.716mm,68.199mm) on Top Layer And Track (83.947mm,69.24mm)(88.29mm,69.24mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.706mil|Location2.X=3474.956mil|Location1.Y=2643.151mil|Location2.Y=2654.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.706mil|Location2.X=3474.956mil|Location1.Y=2643.151mil|Location2.Y=2654.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1_1-2(87.496mm,68.199mm) on Top Layer And Track (83.947mm,67.158mm)(88.29mm,67.158mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.493mil|Location2.X=3425.743mil|Location1.Y=2715.599mil|Location2.Y=2726.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.493mil|Location2.X=3425.743mil|Location1.Y=2715.599mil|Location2.Y=2726.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1_1-2(87.496mm,68.199mm) on Top Layer And Track (83.947mm,69.24mm)(88.29mm,69.24mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3465.54mil|Location2.X=3476.79mil|Location1.Y=2644.926mil|Location2.Y=2656.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3465.54mil|Location2.X=3476.79mil|Location1.Y=2644.926mil|Location2.Y=2656.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R1_1-2(87.496mm,68.199mm) on Top Layer And Track (88.29mm,67.158mm)(88.29mm,69.24mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.71mil|Location2.X=5404.96mil|Location1.Y=2718.824mil|Location2.Y=2730.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.71mil|Location2.X=5404.96mil|Location1.Y=2718.824mil|Location2.Y=2730.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R1-1(137.802mm,68.326mm) on Top Layer And Track (137.033mm,67.285mm)(137.033mm,69.367mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.257mil|Location2.X=5455.507mil|Location1.Y=2648.151mil|Location2.Y=2659.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.257mil|Location2.X=5455.507mil|Location1.Y=2648.151mil|Location2.Y=2659.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1-1(137.802mm,68.326mm) on Top Layer And Track (137.033mm,67.285mm)(141.376mm,67.285mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5395.044mil|Location2.X=5406.294mil|Location1.Y=2720.599mil|Location2.Y=2731.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5395.044mil|Location2.X=5406.294mil|Location1.Y=2720.599mil|Location2.Y=2731.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1-1(137.802mm,68.326mm) on Top Layer And Track (137.033mm,69.367mm)(141.376mm,69.367mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5553.706mil|Location2.X=5564.956mil|Location1.Y=2648.151mil|Location2.Y=2659.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5553.706mil|Location2.X=5564.956mil|Location1.Y=2648.151mil|Location2.Y=2659.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1-2(140.582mm,68.326mm) on Top Layer And Track (137.033mm,67.285mm)(141.376mm,67.285mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.493mil|Location2.X=5515.743mil|Location1.Y=2720.599mil|Location2.Y=2731.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.493mil|Location2.X=5515.743mil|Location1.Y=2720.599mil|Location2.Y=2731.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R1-2(140.582mm,68.326mm) on Top Layer And Track (137.033mm,69.367mm)(141.376mm,69.367mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5555.54mil|Location2.X=5566.79mil|Location1.Y=2649.926mil|Location2.Y=2661.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5555.54mil|Location2.X=5566.79mil|Location1.Y=2649.926mil|Location2.Y=2661.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R1-2(140.582mm,68.326mm) on Top Layer And Track (141.376mm,67.285mm)(141.376mm,69.367mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.71mil|Location2.X=3314.96mil|Location1.Y=2413.824mil|Location2.Y=2425.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3303.71mil|Location2.X=3314.96mil|Location1.Y=2413.824mil|Location2.Y=2425.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R2_1-1(84.716mm,60.579mm) on Top Layer And Track (83.947mm,59.538mm)(83.947mm,61.62mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.257mil|Location2.X=3365.507mil|Location1.Y=2343.151mil|Location2.Y=2354.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.257mil|Location2.X=3365.507mil|Location1.Y=2343.151mil|Location2.Y=2354.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2_1-1(84.716mm,60.579mm) on Top Layer And Track (83.947mm,59.538mm)(88.29mm,59.538mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3305.044mil|Location2.X=3316.294mil|Location1.Y=2415.599mil|Location2.Y=2426.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3305.044mil|Location2.X=3316.294mil|Location1.Y=2415.599mil|Location2.Y=2426.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2_1-1(84.716mm,60.579mm) on Top Layer And Track (83.947mm,61.62mm)(88.29mm,61.62mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.706mil|Location2.X=3474.956mil|Location1.Y=2343.151mil|Location2.Y=2354.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3463.706mil|Location2.X=3474.956mil|Location1.Y=2343.151mil|Location2.Y=2354.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2_1-2(87.496mm,60.579mm) on Top Layer And Track (83.947mm,59.538mm)(88.29mm,59.538mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.493mil|Location2.X=3425.743mil|Location1.Y=2415.599mil|Location2.Y=2426.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3414.493mil|Location2.X=3425.743mil|Location1.Y=2415.599mil|Location2.Y=2426.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2_1-2(87.496mm,60.579mm) on Top Layer And Track (83.947mm,61.62mm)(88.29mm,61.62mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3465.54mil|Location2.X=3476.79mil|Location1.Y=2344.926mil|Location2.Y=2356.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3465.54mil|Location2.X=3476.79mil|Location1.Y=2344.926mil|Location2.Y=2356.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R2_1-2(87.496mm,60.579mm) on Top Layer And Track (88.29mm,59.538mm)(88.29mm,61.62mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.71mil|Location2.X=5404.96mil|Location1.Y=2418.824mil|Location2.Y=2430.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.71mil|Location2.X=5404.96mil|Location1.Y=2418.824mil|Location2.Y=2430.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R2-1(137.802mm,60.706mm) on Top Layer And Track (137.033mm,59.665mm)(137.033mm,61.747mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.257mil|Location2.X=5455.507mil|Location1.Y=2348.151mil|Location2.Y=2359.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.257mil|Location2.X=5455.507mil|Location1.Y=2348.151mil|Location2.Y=2359.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2-1(137.802mm,60.706mm) on Top Layer And Track (137.033mm,59.665mm)(141.376mm,59.665mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5395.044mil|Location2.X=5406.294mil|Location1.Y=2420.599mil|Location2.Y=2431.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5395.044mil|Location2.X=5406.294mil|Location1.Y=2420.599mil|Location2.Y=2431.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2-1(137.802mm,60.706mm) on Top Layer And Track (137.033mm,61.747mm)(141.376mm,61.747mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5553.706mil|Location2.X=5564.956mil|Location1.Y=2348.151mil|Location2.Y=2359.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5553.706mil|Location2.X=5564.956mil|Location1.Y=2348.151mil|Location2.Y=2359.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2-2(140.582mm,60.706mm) on Top Layer And Track (137.033mm,59.665mm)(141.376mm,59.665mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.493mil|Location2.X=5515.743mil|Location1.Y=2420.599mil|Location2.Y=2431.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.493mil|Location2.X=5515.743mil|Location1.Y=2420.599mil|Location2.Y=2431.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R2-2(140.582mm,60.706mm) on Top Layer And Track (137.033mm,61.747mm)(141.376mm,61.747mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5555.54mil|Location2.X=5566.79mil|Location1.Y=2349.926mil|Location2.Y=2361.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5555.54mil|Location2.X=5566.79mil|Location1.Y=2349.926mil|Location2.Y=2361.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R2-2(140.582mm,60.706mm) on Top Layer And Track (141.376mm,59.665mm)(141.376mm,61.747mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2858.151mil|Location2.X=2869.401mil|Location1.Y=2329.257mil|Location2.Y=2340.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2858.151mil|Location2.X=2869.401mil|Location1.Y=2329.257mil|Location2.Y=2340.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3_1-1(73.66mm,58.681mm) on Top Layer And Track (72.619mm,57.912mm)(72.619mm,62.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2928.824mil|Location2.X=2940.074mil|Location1.Y=2278.71mil|Location2.Y=2289.96mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2928.824mil|Location2.X=2940.074mil|Location1.Y=2278.71mil|Location2.Y=2289.96mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R3_1-1(73.66mm,58.681mm) on Top Layer And Track (72.619mm,57.912mm)(74.701mm,57.912mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2930.599mil|Location2.X=2941.849mil|Location1.Y=2280.044mil|Location2.Y=2291.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2930.599mil|Location2.X=2941.849mil|Location1.Y=2280.044mil|Location2.Y=2291.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3_1-1(73.66mm,58.681mm) on Top Layer And Track (74.701mm,57.912mm)(74.701mm,62.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2858.151mil|Location2.X=2869.401mil|Location1.Y=2438.706mil|Location2.Y=2449.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2858.151mil|Location2.X=2869.401mil|Location1.Y=2438.706mil|Location2.Y=2449.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3_1-2(73.66mm,61.461mm) on Top Layer And Track (72.619mm,57.912mm)(72.619mm,62.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.926mil|Location2.X=2871.176mil|Location1.Y=2440.54mil|Location2.Y=2451.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.926mil|Location2.X=2871.176mil|Location1.Y=2440.54mil|Location2.Y=2451.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R3_1-2(73.66mm,61.461mm) on Top Layer And Track (72.619mm,62.255mm)(74.701mm,62.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2930.599mil|Location2.X=2941.849mil|Location1.Y=2389.493mil|Location2.Y=2400.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2930.599mil|Location2.X=2941.849mil|Location1.Y=2389.493mil|Location2.Y=2400.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3_1-2(73.66mm,61.461mm) on Top Layer And Track (74.701mm,57.912mm)(74.701mm,62.255mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4948.151mil|Location2.X=4959.401mil|Location1.Y=2334.257mil|Location2.Y=2345.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4948.151mil|Location2.X=4959.401mil|Location1.Y=2334.257mil|Location2.Y=2345.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3-1(126.746mm,58.808mm) on Top Layer And Track (125.705mm,58.039mm)(125.705mm,62.382mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.824mil|Location2.X=5030.074mil|Location1.Y=2283.71mil|Location2.Y=2294.96mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.824mil|Location2.X=5030.074mil|Location1.Y=2283.71mil|Location2.Y=2294.96mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R3-1(126.746mm,58.808mm) on Top Layer And Track (125.705mm,58.039mm)(127.787mm,58.039mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5020.599mil|Location2.X=5031.849mil|Location1.Y=2285.044mil|Location2.Y=2296.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5020.599mil|Location2.X=5031.849mil|Location1.Y=2285.044mil|Location2.Y=2296.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3-1(126.746mm,58.808mm) on Top Layer And Track (127.787mm,58.039mm)(127.787mm,62.382mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4948.151mil|Location2.X=4959.401mil|Location1.Y=2443.706mil|Location2.Y=2454.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4948.151mil|Location2.X=4959.401mil|Location1.Y=2443.706mil|Location2.Y=2454.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3-2(126.746mm,61.588mm) on Top Layer And Track (125.705mm,58.039mm)(125.705mm,62.382mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4949.926mil|Location2.X=4961.176mil|Location1.Y=2445.54mil|Location2.Y=2456.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4949.926mil|Location2.X=4961.176mil|Location1.Y=2445.54mil|Location2.Y=2456.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R3-2(126.746mm,61.588mm) on Top Layer And Track (125.705mm,62.382mm)(127.787mm,62.382mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5020.599mil|Location2.X=5031.849mil|Location1.Y=2394.493mil|Location2.Y=2405.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5020.599mil|Location2.X=5031.849mil|Location1.Y=2394.493mil|Location2.Y=2405.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R3-2(126.746mm,61.588mm) on Top Layer And Track (127.787mm,58.039mm)(127.787mm,62.382mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2453.151mil|Location2.X=2464.401mil|Location1.Y=2628.391mil|Location2.Y=2639.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2453.151mil|Location2.X=2464.401mil|Location1.Y=2628.391mil|Location2.Y=2639.641mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4_1-1(63.373mm,66.279mm) on Top Layer And Track (62.332mm,62.705mm)(62.332mm,67.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2454.926mil|Location2.X=2466.176mil|Location1.Y=2629.725mil|Location2.Y=2640.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2454.926mil|Location2.X=2466.176mil|Location1.Y=2629.725mil|Location2.Y=2640.975mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R4_1-1(63.373mm,66.279mm) on Top Layer And Track (62.332mm,67.048mm)(64.414mm,67.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2525.599mil|Location2.X=2536.849mil|Location1.Y=2579.178mil|Location2.Y=2590.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2525.599mil|Location2.X=2536.849mil|Location1.Y=2579.178mil|Location2.Y=2590.428mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4_1-1(63.373mm,66.279mm) on Top Layer And Track (64.414mm,62.705mm)(64.414mm,67.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2453.151mil|Location2.X=2464.401mil|Location1.Y=2518.942mil|Location2.Y=2530.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2453.151mil|Location2.X=2464.401mil|Location1.Y=2518.942mil|Location2.Y=2530.192mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4_1-2(63.373mm,63.499mm) on Top Layer And Track (62.332mm,62.705mm)(62.332mm,67.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2523.824mil|Location2.X=2535.074mil|Location1.Y=2467.895mil|Location2.Y=2479.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2523.824mil|Location2.X=2535.074mil|Location1.Y=2467.895mil|Location2.Y=2479.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R4_1-2(63.373mm,63.499mm) on Top Layer And Track (62.332mm,62.705mm)(64.414mm,62.705mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2525.599mil|Location2.X=2536.849mil|Location1.Y=2469.729mil|Location2.Y=2480.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2525.599mil|Location2.X=2536.849mil|Location1.Y=2469.729mil|Location2.Y=2480.979mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4_1-2(63.373mm,63.499mm) on Top Layer And Track (64.414mm,62.705mm)(64.414mm,67.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.151mil|Location2.X=4554.401mil|Location1.Y=2633.391mil|Location2.Y=2644.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.151mil|Location2.X=4554.401mil|Location1.Y=2633.391mil|Location2.Y=2644.641mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4-1(116.459mm,66.406mm) on Top Layer And Track (115.418mm,62.832mm)(115.418mm,67.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4544.926mil|Location2.X=4556.176mil|Location1.Y=2634.725mil|Location2.Y=2645.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4544.926mil|Location2.X=4556.176mil|Location1.Y=2634.725mil|Location2.Y=2645.975mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R4-1(116.459mm,66.406mm) on Top Layer And Track (115.418mm,67.175mm)(117.5mm,67.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4615.599mil|Location2.X=4626.849mil|Location1.Y=2584.178mil|Location2.Y=2595.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4615.599mil|Location2.X=4626.849mil|Location1.Y=2584.178mil|Location2.Y=2595.428mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4-1(116.459mm,66.406mm) on Top Layer And Track (117.5mm,62.832mm)(117.5mm,67.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.151mil|Location2.X=4554.401mil|Location1.Y=2523.942mil|Location2.Y=2535.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4543.151mil|Location2.X=4554.401mil|Location1.Y=2523.942mil|Location2.Y=2535.192mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4-2(116.459mm,63.626mm) on Top Layer And Track (115.418mm,62.832mm)(115.418mm,67.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4613.824mil|Location2.X=4625.074mil|Location1.Y=2472.895mil|Location2.Y=2484.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4613.824mil|Location2.X=4625.074mil|Location1.Y=2472.895mil|Location2.Y=2484.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R4-2(116.459mm,63.626mm) on Top Layer And Track (115.418mm,62.832mm)(117.5mm,62.832mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4615.599mil|Location2.X=4626.849mil|Location1.Y=2474.729mil|Location2.Y=2485.979mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4615.599mil|Location2.X=4626.849mil|Location1.Y=2474.729mil|Location2.Y=2485.979mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R4-2(116.459mm,63.626mm) on Top Layer And Track (117.5mm,62.832mm)(117.5mm,67.175mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2588.151mil|Location2.X=2599.401mil|Location1.Y=2563.706mil|Location2.Y=2574.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2588.151mil|Location2.X=2599.401mil|Location1.Y=2563.706mil|Location2.Y=2574.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5_1-1(66.802mm,64.636mm) on Top Layer And Track (65.761mm,61.062mm)(65.761mm,65.405mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2589.926mil|Location2.X=2601.176mil|Location1.Y=2565.04mil|Location2.Y=2576.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2589.926mil|Location2.X=2601.176mil|Location1.Y=2565.04mil|Location2.Y=2576.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R5_1-1(66.802mm,64.636mm) on Top Layer And Track (65.761mm,65.405mm)(67.843mm,65.405mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.599mil|Location2.X=2671.849mil|Location1.Y=2514.493mil|Location2.Y=2525.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.599mil|Location2.X=2671.849mil|Location1.Y=2514.493mil|Location2.Y=2525.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5_1-1(66.802mm,64.636mm) on Top Layer And Track (67.843mm,61.062mm)(67.843mm,65.405mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2588.151mil|Location2.X=2599.401mil|Location1.Y=2454.257mil|Location2.Y=2465.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2588.151mil|Location2.X=2599.401mil|Location1.Y=2454.257mil|Location2.Y=2465.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5_1-2(66.802mm,61.856mm) on Top Layer And Track (65.761mm,61.062mm)(65.761mm,65.405mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.824mil|Location2.X=2670.074mil|Location1.Y=2403.21mil|Location2.Y=2414.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.824mil|Location2.X=2670.074mil|Location1.Y=2403.21mil|Location2.Y=2414.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R5_1-2(66.802mm,61.856mm) on Top Layer And Track (65.761mm,61.062mm)(67.843mm,61.062mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.599mil|Location2.X=2671.849mil|Location1.Y=2405.044mil|Location2.Y=2416.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.599mil|Location2.X=2671.849mil|Location1.Y=2405.044mil|Location2.Y=2416.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5_1-2(66.802mm,61.856mm) on Top Layer And Track (67.843mm,61.062mm)(67.843mm,65.405mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.151mil|Location2.X=4689.401mil|Location1.Y=2568.706mil|Location2.Y=2579.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.151mil|Location2.X=4689.401mil|Location1.Y=2568.706mil|Location2.Y=2579.956mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5-1(119.888mm,64.763mm) on Top Layer And Track (118.847mm,61.189mm)(118.847mm,65.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4679.926mil|Location2.X=4691.176mil|Location1.Y=2570.04mil|Location2.Y=2581.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4679.926mil|Location2.X=4691.176mil|Location1.Y=2570.04mil|Location2.Y=2581.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R5-1(119.888mm,64.763mm) on Top Layer And Track (118.847mm,65.532mm)(120.929mm,65.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4750.599mil|Location2.X=4761.849mil|Location1.Y=2519.493mil|Location2.Y=2530.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4750.599mil|Location2.X=4761.849mil|Location1.Y=2519.493mil|Location2.Y=2530.743mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5-1(119.888mm,64.763mm) on Top Layer And Track (120.929mm,61.189mm)(120.929mm,65.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.151mil|Location2.X=4689.401mil|Location1.Y=2459.257mil|Location2.Y=2470.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.151mil|Location2.X=4689.401mil|Location1.Y=2459.257mil|Location2.Y=2470.507mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5-2(119.888mm,61.983mm) on Top Layer And Track (118.847mm,61.189mm)(118.847mm,65.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4748.824mil|Location2.X=4760.074mil|Location1.Y=2408.21mil|Location2.Y=2419.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4748.824mil|Location2.X=4760.074mil|Location1.Y=2408.21mil|Location2.Y=2419.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R5-2(119.888mm,61.983mm) on Top Layer And Track (118.847mm,61.189mm)(120.929mm,61.189mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4750.599mil|Location2.X=4761.849mil|Location1.Y=2410.044mil|Location2.Y=2421.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4750.599mil|Location2.X=4761.849mil|Location1.Y=2410.044mil|Location2.Y=2421.294mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R5-2(119.888mm,61.983mm) on Top Layer And Track (120.929mm,61.189mm)(120.929mm,65.532mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2653.71mil|Location2.X=2664.96mil|Location1.Y=2348.824mil|Location2.Y=2360.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2653.71mil|Location2.X=2664.96mil|Location1.Y=2348.824mil|Location2.Y=2360.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R6_1-1(68.206mm,58.928mm) on Top Layer And Track (67.437mm,57.887mm)(67.437mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2704.257mil|Location2.X=2715.507mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2704.257mil|Location2.X=2715.507mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6_1-1(68.206mm,58.928mm) on Top Layer And Track (67.437mm,57.887mm)(71.78mm,57.887mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2655.044mil|Location2.X=2666.294mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2655.044mil|Location2.X=2666.294mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6_1-1(68.206mm,58.928mm) on Top Layer And Track (67.437mm,59.969mm)(71.78mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2813.706mil|Location2.X=2824.956mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2813.706mil|Location2.X=2824.956mil|Location1.Y=2278.151mil|Location2.Y=2289.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6_1-2(70.986mm,58.928mm) on Top Layer And Track (67.437mm,57.887mm)(71.78mm,57.887mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2764.493mil|Location2.X=2775.743mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2764.493mil|Location2.X=2775.743mil|Location1.Y=2350.599mil|Location2.Y=2361.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6_1-2(70.986mm,58.928mm) on Top Layer And Track (67.437mm,59.969mm)(71.78mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2815.54mil|Location2.X=2826.79mil|Location1.Y=2279.926mil|Location2.Y=2291.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2815.54mil|Location2.X=2826.79mil|Location1.Y=2279.926mil|Location2.Y=2291.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R6_1-2(70.986mm,58.928mm) on Top Layer And Track (71.78mm,57.887mm)(71.78mm,59.969mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4743.71mil|Location2.X=4754.96mil|Location1.Y=2353.824mil|Location2.Y=2365.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4743.71mil|Location2.X=4754.96mil|Location1.Y=2353.824mil|Location2.Y=2365.074mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.068mm &lt; 0.254mm) Between Pad R6-1(121.292mm,59.055mm) on Top Layer And Track (120.523mm,58.014mm)(120.523mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4794.257mil|Location2.X=4805.507mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4794.257mil|Location2.X=4805.507mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6-1(121.292mm,59.055mm) on Top Layer And Track (120.523mm,58.014mm)(124.866mm,58.014mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4745.044mil|Location2.X=4756.294mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4745.044mil|Location2.X=4756.294mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6-1(121.292mm,59.055mm) on Top Layer And Track (120.523mm,60.096mm)(124.866mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4903.706mil|Location2.X=4914.956mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4903.706mil|Location2.X=4914.956mil|Location1.Y=2283.151mil|Location2.Y=2294.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6-2(124.072mm,59.055mm) on Top Layer And Track (120.523mm,58.014mm)(124.866mm,58.014mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.493mil|Location2.X=4865.743mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4854.493mil|Location2.X=4865.743mil|Location1.Y=2355.599mil|Location2.Y=2366.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.09mm &lt; 0.254mm) Between Pad R6-2(124.072mm,59.055mm) on Top Layer And Track (120.523mm,60.096mm)(124.866mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.09mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4905.54mil|Location2.X=4916.79mil|Location1.Y=2284.926mil|Location2.Y=2296.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\INA288\PCB-layout\INA288.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4905.54mil|Location2.X=4916.79mil|Location1.Y=2284.926mil|Location2.Y=2296.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.093mm &lt; 0.254mm) Between Pad R6-2(124.072mm,59.055mm) on Top Layer And Track (124.866mm,58.014mm)(124.866mm,60.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.093mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

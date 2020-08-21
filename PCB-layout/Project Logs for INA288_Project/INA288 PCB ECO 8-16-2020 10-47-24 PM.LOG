@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=NetINA1_8 Pin=INA1-8
+Added Pin To Net: NetName=NetP1_2 Pin=INA1-8
+Change Net Name : Old Net Name=NetINA1_8 New Net Name=NetP1_1
+Change Net Name : Old Net Name=NetP1_2 New Net Name=NetINA1_8
+Added Room: Name=INA288
